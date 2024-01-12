@@ -52,6 +52,30 @@ const MayorIgual = (x, y) => not (x < y);//(x > y) || (x = y);
                             Ejersicios
   -------------------------------------------------------------------*/
 
-//1.1
+//1.3
+const max = (x, y) => x > y ? x : y;
 
+const p = (a, b, c) => a > b ? square(a) + square(max(b, c)) : square(b) + square(max(a, c));
 
+//1.8
+const cube = (x) => x * x * x;
+const good_enough = (previous_guess, guess) => abs((guess - previous_guess) / guess) < 0.00000000001;
+const improve = (guess, x) => ((x / (guess * guess)) + (2 * guess)) / 3;
+const cube_root_iter = (guess, x) => good_enough(improve(guess, x), guess) ? guess: cube_root_iter(improve(guess, x),x);
+console.log(cube_root_iter(0.1, 7));
+
+// Funcio de raiz cuadrada con definiciones internas
+const sqrt = function (x) {
+    const average = (x, y) => (x + y) / 2;
+    const abs = (x) => x < 0 ? -x : x;
+    const square = (x) => x * x;
+
+    const good_enough = (guess, x) => abs(square(guess) - x) < 0.001;
+    const improve = (guess, x) => average(guess, (x / guess));
+    
+    const sqrt_iter = (guess, x) => good_enough(guess, x) ? guess : sqrt_iter(improve(guess,x), x); 
+
+    return sqrt_iter(10, x);
+
+}
+console.log(sqrt(9));
